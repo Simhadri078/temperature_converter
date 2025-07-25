@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbczqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Temparature Converter</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        *{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(temp_conveter.jpg);
+    background-size: auto;
+}
+.container{
+    max-width: 450px;
+    background: rgb(201, 176, 176);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 3px black;
+    font-family: sans-serif;
+    padding: 20px;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+h1{
+    color: white;
+    letter-spacing: 1.2px;
+    font-size: 30px;
+}
+#celcius, #kelvin, #fahrenheit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+input{
+    float: 5;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+    padding: 0 10px;
+
+}
+
+.icon{
+    flex: 1;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 5px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 550;
+    background: yellowgreen;
+    color: white;
+    border-radius: 0 10px 10px 0;
+}
+.button{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.button button{
+    border: none;
+    outline: none;
+    padding: 10px 30px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+.button button:hover{
+    background: greenyellow;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Temparature Converter</h1>
+            <span class="Temparature-icon">
+                <i class="fa-solid fa-temperature-three-quarters"></i>
+            </span>
+        </div>
+        <div id="celcius">
+            <input type="number" placeholder="Celcius">
+            <span class="icon">&#8451</span>
+        </div>
+        <div id="fahrenheit">
+            <input type="number" placeholder="Fahreheit">
+            <span class="icon">&#8457</span>
+        </div>
+        <div id="kelvin">
+            <input type="number" placeholder="Kelvin">
+            <span class="icon">&#8490</span>
+        </div>
+        <div class="button">
+            <button>Clear All</button>
+        </div>
+    </div>
+    <script>
+        let celciusInput=document.querySelector(`#celcius > input`);
+let fahrenheitInput=document.querySelector(`#fahrenheit>input`)
+let kelvinInput=document.querySelector(`#kelvin>input`)
+let btn=document.querySelector('.button button')
+
+function roundNumber(number){
+    return Math.round(number*100)/100
+}
+
+// celcius to fahrenheit conversion and kelvin conversion
+celciusInput.addEventListener('input',function(){
+    let cTemp=parseFloat(celciusInput.value)
+    let fTemp=(cTemp*(9/5))+32
+    let kTemp=cTemp+273.15
+    fahrenheitInput.value=roundNumber(fTemp)
+    kelvinInput.value=roundNumber(kTemp)
+})
+// Fahrenheit to celsius and kelvin converter
+fahrenheitInput.addEventListener('input',function(){
+    let fTemp=parseFloat(fahrenheitInput.value)
+    let cTemp=(fTemp-32)*(5/9)
+    let kTemp=(fTemp-32)*(5/9)+273.15
+    celciusInput.value=roundNumber(cTemp)
+    kelvinInput.value=roundNumber(kTemp)
+})
+ 
+// Kelvin to Fahrenheit and Celcius Conversion
+kelvinInput.addEventListener('input',function(){
+    let kTemp=parseFloat(kelvinInput.value)
+    let cTemp=kTemp-273.15
+    let fTemp=(kTemp-273.15)*(9/5)+32
+    celciusInput.value=roundNumber(cTemp)
+    fahrenheitInput.value=roundNumber(fTemp)
+})
+
+btn.addEventListener('click',()=>{
+    celciusInput.value=""
+    fahrenheitInput.value=""
+    kelvinInput.value=""
+})
+    </script>
+
+
+    <!-- <script src="app.js"></script> -->
+</body>
+</html>
